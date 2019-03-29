@@ -26,6 +26,9 @@ public class PracticalTest01Var03ChooseNumber extends AppCompatActivity {
                         Log.d(Constants.PROCESSING_THREAD_TAG, inputEditText.getText().toString());
                         intent.putExtra(Constants.NUMBER_OF_CLICKS, Integer.valueOf(inputEditText.getText().toString()));
                         startActivityForResult(intent, Constants.SECONDARY_ACTIVITY_REQUEST_CODE);
+
+                        Intent intent2 = new Intent(getApplicationContext(), PracticalTest01Var06Service.class);
+                        getApplicationContext().startService(intent2);
                     }
                     break;
             }
@@ -60,5 +63,12 @@ public class PracticalTest01Var03ChooseNumber extends AppCompatActivity {
         if (savedInstanceState.containsKey(Constants.LEFT_COUNT)) {
             inputEditText.setText(savedInstanceState.getString(Constants.LEFT_COUNT));
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent intent = new Intent(this, PracticalTest01Var06Service.class);
+        stopService(intent);
+        super.onDestroy();
     }
 }

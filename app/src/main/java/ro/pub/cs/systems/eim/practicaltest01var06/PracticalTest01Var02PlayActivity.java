@@ -74,4 +74,20 @@ public class PracticalTest01Var02PlayActivity extends AppCompatActivity {
             Log.d(Constants.PROCESSING_THREAD_TAG, number.toString() + " intent");
         }
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putString(Constants.LEFT_COUNT, scoreEditText.getText().toString());
+        savedInstanceState.putString(Constants.RIGHT_COUNT, guessEditText.getText().toString());
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState.containsKey(Constants.LEFT_COUNT)) {
+            scoreEditText.setText(savedInstanceState.getString(Constants.LEFT_COUNT));
+        }
+        if (savedInstanceState.containsKey(Constants.RIGHT_COUNT)) {
+            guessEditText.setText(savedInstanceState.getString(Constants.RIGHT_COUNT));
+        }
+    }
 }
